@@ -1,4 +1,5 @@
 import "./websocket/client";
+import "./websocket/admin";
 
 import { http } from "./http";
 
