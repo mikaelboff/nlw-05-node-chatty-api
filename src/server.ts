@@ -1,12 +1,5 @@
-import "./database";
+import "./websocket/client";
 
-import express from "express";
-import { routes } from "./routes";
+import { http } from "./http";
 
-const app = express();
-
-app.use(express.json());
-
-app.use(routes);
-
-app.listen(3333, () => console.log("moeu"));
+http.listen(3333, () => console.log("moeu"));

@@ -15,4 +15,25 @@ export class SettingsController {
       return res.status(400).json({ message: e.message });
     }
   }
+
+  async findByUsername(req: Request, res: Response) {
+    const { username } = req.params;
+
+    const settingsService = new SettingsService();
+
+    const setting = await settingsService.findByUsername(username);
+
+    return res.json(setting);
+  }
+
+  async update(req: Request, res: Response) {
+    const { username } = req.params;
+    const { chat } = req.body;
+
+    const settingsService = new SettingsService();
+
+    await settingsService.update(username, chat);
+
+    return res.json();
+  }
 }

@@ -1,4 +1,5 @@
 import { getCustomRepository } from "typeorm";
+import { Settings } from "../entities/Settings";
 import { SettingsRepository } from "../repositories/SettingsRepository";
 
 interface SettingsCreateDTO {
@@ -27,5 +28,18 @@ export class SettingsService {
     await this.settingsRepository.save(settings);
 
     return settings;
+  }
+
+  async findByUsername(username: string) {
+    return await this.settingsRepository.findOne({ username });
+  }
+
+  async update(username: string, chat: boolean) {
+    await this.settingsRepository
+      .createQueryBuilder()
+      .update(Settings)
+      .set({ chat })
+      .where("username= :username", { username })
+      .execute();
   }
 }
